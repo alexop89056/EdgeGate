@@ -6,6 +6,20 @@ EdgeGate lets a team register origin services, route traffic by hostname and pat
 
 ## Run
 
+Start the complete local stack (gateway + PostgreSQL) with Docker:
+
+```bash
+docker-compose -f deploy/docker-compose.yml up --build
+```
+
+The gateway is then available at `http://localhost:8080`. Stop it with:
+
+```bash
+docker-compose -f deploy/docker-compose.yml down
+```
+
+For local Java development, start only the database:
+
 ```bash
 docker compose up -d
 ../VeilRoute/gradlew bootRun

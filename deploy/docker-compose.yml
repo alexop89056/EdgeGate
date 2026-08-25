@@ -1,0 +1,31 @@
+services:
+  edgegate:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/edgegate
+      DB_USERNAME: edgegate
+      DB_PASSWORD: edgegate
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: edgegate
+      POSTGRES_USER: edgegate
+      POSTGRES_PASSWORD: edgegate
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U edgegate -d edgegate"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - edgegate-postgres:/var/lib/postgresql/data
+
+volumes:
+  edgegate-postgres:
