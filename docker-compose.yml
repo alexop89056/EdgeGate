@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: edgegate
+      POSTGRES_USER: edgegate
+      POSTGRES_PASSWORD: edgegate
+    ports:
+      - "5432:5432"
+    volumes:
+      - edgegate-postgres:/var/lib/postgresql/data
+volumes:
+  edgegate-postgres:

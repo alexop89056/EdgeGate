@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: edgegate
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/edgegate}
+    username: ${DB_USERNAME:edgegate}
+    password: ${DB_PASSWORD:edgegate}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+server:
+  port: ${PORT:8080}
